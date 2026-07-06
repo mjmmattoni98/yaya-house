@@ -1,0 +1,51 @@
+id,title,brand,neighborhood,status,bedrooms,bathrooms,max_occupancy,size_m2,monthly_rent,currency,floor_type,is_exterior,age_label
+apt_001,estudio práctico cerca del metro,Yaya STAY,Vallecas,available,0,1,1,34,760,EUR,2ª planta,true,+1 año
+apt_002,estudio moderno amueblado,Yaya FLEX,Lavapiés,available,0,1,1,36,980,EUR,3ª planta,true,-1 año
+apt_003,estudio tranquilo interior,Yaya STAY,Usera,reserved,0,1,1,32,720,EUR,1ª planta,false,+1 año
+apt_004,loft luminoso recién reformado,Yaya FLEX,Malasaña,available,0,1,1,41,1220,EUR,ático,true,-1 año
+apt_005,apartamento compacto con encanto,Yaya STAY,La Latina,available,1,1,2,45,1180,EUR,2ª planta,true,+1 año
+apt_006,apartamento exterior funcional,Yaya STAY,Carabanchel,rented,1,1,2,47,890,EUR,3ª planta,true,+1 año
+apt_007,piso acogedor con mucha luz,Yaya STAY,Delicias,available,1,1,2,50,1260,EUR,4ª planta,true,+1 año
+apt_008,apartamento elegante en zona prime,Yaya FLEX,Salamanca,available,1,1,2,55,1950,EUR,3ª planta,true,-1 año
+apt_009,vivienda tranquila para larga estancia,Yaya STAY,Moratalaz,available,1,1,2,52,1030,EUR,1ª planta,false,+1 año
+apt_010,apartamento renovado exterior,Yaya STAY,Chueca,reserved,1,1,2,54,1680,EUR,2ª planta,true,+1 año
+apt_011,piso de un dormitorio con balcón,Yaya STAY,Retiro,available,1,1,2,58,1760,EUR,4ª planta,true,+1 año
+apt_012,apartamento premium muy luminoso,Yaya FLEX,Justicia,available,1,1,2,57,1880,EUR,ático,true,-1 año
+apt_013,piso cómodo bien distribuido,Yaya STAY,Argüelles,available,2,1,3,68,1850,EUR,2ª planta,true,+1 año
+apt_014,vivienda exterior para compartir,Yaya STAY,Lavapiés,reserved,2,1,3,65,1560,EUR,3ª planta,true,+1 año
+apt_015,piso reformado con salón amplio,Yaya STAY,Delicias,available,2,1,3,70,1650,EUR,1ª planta,true,+1 año
+apt_016,apartamento amplio con cocina equipada,Yaya STAY,Legazpi,available,2,2,3,76,1780,EUR,4ª planta,true,+1 año
+apt_017,piso luminoso cerca del parque,Yaya STAY,Retiro,rented,2,2,3,82,2460,EUR,3ª planta,true,+1 año
+apt_018,vivienda exterior de diseño,Yaya FLEX,Chamberí,available,2,2,3,80,2640,EUR,ático,true,-1 año
+apt_019,piso clásico actualizado,Yaya STAY,Chamartín,available,2,1,3,78,2380,EUR,2ª planta,true,+1 año
+apt_020,apartamento céntrico con estilo,Yaya FLEX,Chueca,reserved,2,1,3,72,2240,EUR,3ª planta,true,-1 año
+apt_021,piso interior silencioso,Yaya STAY,Usera,available,2,1,3,66,1180,EUR,2ª planta,false,+1 año
+apt_022,vivienda familiar bien conectada,Yaya STAY,Carabanchel,available,2,1,3,74,1320,EUR,1ª planta,true,+1 año
+apt_023,piso exterior con terraza,Yaya STAY,La Latina,available,2,2,3,79,2180,EUR,ático,true,+1 año
+apt_024,apartamento premium reformado,Yaya FLEX,Salamanca,rented,2,2,3,84,2980,EUR,4ª planta,true,-1 año
+apt_025,piso espacioso para larga estancia,Yaya STAY,Moncloa,available,3,2,4,92,2460,EUR,2ª planta,true,+1 año
+apt_026,vivienda familiar exterior,Yaya STAY,Argüelles,available,3,2,4,96,2580,EUR,3ª planta,true,+1 año
+apt_027,piso grande con tres dormitorios,Yaya STAY,Lavapiés,available,3,1,4,88,2100,EUR,1ª planta,true,+1 año
+apt_028,piso amplio cerca de universidades,Yaya STAY,Moncloa,reserved,3,2,4,101,2680,EUR,4ª planta,true,+1 año
+apt_029,vivienda elegante con mucha luz,Yaya STAY,Chamberí,available,3,2,4,108,3420,EUR,3ª planta,true,+1 año
+apt_030,piso señorial reformado,Yaya FLEX,Justicia,available,3,2,4,112,3820,EUR,2ª planta,true,-1 año
+apt_031,piso familiar junto al Retiro,Yaya STAY,Retiro,available,3,2,4,105,3260,EUR,4ª planta,true,+1 año
+apt_032,vivienda premium exterior,Yaya STAY,Salamanca,available,3,2,4,116,4050,EUR,3ª planta,true,+1 año
+apt_033,piso amplio con zona de trabajo,Yaya STAY,Chamartín,rented,3,2,4,110,3340,EUR,2ª planta,true,+1 año
+apt_034,apartamento grande recién actualizado,Yaya FLEX,Malasaña,available,3,2,4,94,2860,EUR,ático,true,-1 año
+apt_035,piso familiar económico,Yaya STAY,Vallecas,available,3,1,4,86,1520,EUR,2ª planta,true,+1 año
+apt_036,vivienda amplia y tranquila,Yaya STAY,Moratalaz,reserved,3,2,4,95,1820,EUR,3ª planta,false,+1 año
+apt_037,piso exterior con comedor grande,Yaya STAY,Legazpi,available,3,2,4,98,2380,EUR,4ª planta,true,+1 año
+apt_038,piso premium con terraza privada,Yaya FLEX,Salamanca,available,3,3,4,124,4680,EUR,ático,true,-1 año
+apt_039,vivienda grande para familia,Yaya STAY,Carabanchel,available,4,2,5,118,2140,EUR,2ª planta,true,+1 año
+apt_040,piso de cuatro dormitorios reformado,Yaya STAY,Delicias,available,4,2,5,122,2580,EUR,3ª planta,true,+1 año
+apt_041,piso familiar luminoso,Yaya STAY,Argüelles,reserved,4,2,5,126,3340,EUR,4ª planta,true,+1 año
+apt_042,vivienda amplia junto al parque,Yaya STAY,Retiro,available,4,3,5,136,4380,EUR,3ª planta,true,+1 año
+apt_043,piso señorial de gran formato,Yaya STAY,Chamberí,available,4,3,5,142,4860,EUR,2ª planta,true,+1 año
+apt_044,vivienda exclusiva en finca clásica,Yaya FLEX,Justicia,available,4,3,5,148,5420,EUR,3ª planta,true,-1 año
+apt_045,piso premium familiar,Yaya STAY,Salamanca,rented,4,3,5,152,5750,EUR,4ª planta,true,+1 año
+apt_046,ático amplio con vistas,Yaya FLEX,Chamartín,available,4,3,5,146,5120,EUR,ático,true,-1 año
+apt_047,piso grande para compartir,Yaya STAY,Moncloa,available,5,3,6,158,3950,EUR,3ª planta,true,+1 año
+apt_048,vivienda familiar muy espaciosa,Yaya STAY,Retiro,available,5,3,6,168,5480,EUR,2ª planta,true,+1 año
+apt_049,piso exclusivo de cinco dormitorios,Yaya STAY,Salamanca,available,5,4,6,182,6950,EUR,ático,true,+1 año
+apt_050,vivienda señorial para larga estancia,Yaya STAY,Justicia,reserved,5,4,6,176,6420,EUR,4ª planta,true,+1 año
