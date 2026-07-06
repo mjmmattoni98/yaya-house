@@ -5,7 +5,7 @@ import type { CSSProperties, Dispatch, ReactNode, SetStateAction } from "react";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
-import type { Apartment, ApartmentBrand } from "@/lib/apartment";
+import type { Apartment } from "@/lib/apartment";
 import {
   addNumberOption,
   applyFilters,
@@ -590,7 +590,7 @@ function PropertyCard({ apartment }: { apartment: Apartment }) {
   );
 }
 
-function BrandLabel({ brand }: { brand: ApartmentBrand }) {
+function BrandLabel({ brand }: { brand: string }) {
   const [name, product] = brand.split(" ");
   const brandClass = product === "FLEX" ? "brand--flex" : "brand--stay";
 
