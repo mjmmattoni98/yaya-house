@@ -49,9 +49,9 @@ async function getApartments(): Promise<Apartment[]> {
   return parseCsv(csv).map((record, index) => ({
     id: record.id,
     title: record.title,
-    brand: record.brand,
+    brand: parseApartmentBrand(record.brand),
     neighborhood: record.neighborhood,
-    status: record.status,
+    status: parseApartmentStatus(record.status),
     bedrooms: Number(record.bedrooms),
     bathrooms: Number(record.bathrooms),
     maxOccupancy: Number(record.max_occupancy),
@@ -63,6 +63,22 @@ async function getApartments(): Promise<Apartment[]> {
     ageLabel: record.age_label,
     imageUrl: PROPERTY_IMAGES[index % PROPERTY_IMAGES.length],
   }));
+}
+
+function parseApartmentBrand(value: string): ApartmentBrand {
+  if (value === "Yaya FLEX" || value === "Yaya STAY") {
+    return value;
+  }
+
+  throw new Error(`Unknown apartment brand: ${value}`);
+}
+
+function parseApartmentStatus(value: string): ApartmentStatus {
+  if (value === "available" || value === "reserved" || value === "rented") {
+    return value;
+  }
+
+  throw new Error(`Unknown apartment status: ${value}`);
 }
 
 function parseCsv(input: string): CsvRecord[] {

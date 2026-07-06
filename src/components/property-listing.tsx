@@ -6,30 +6,29 @@ import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import type { Apartment, ApartmentBrand } from "@/lib/apartment";
-
-type RangeValue = {
-  min: number;
-  max: number;
-};
-
-type FilterState = {
-  price: RangeValue;
-  size: RangeValue;
-  bedrooms: number[];
-  bathrooms: number[];
-};
-
-type HistogramBucket = {
-  label: string;
-  min: number;
-  max: number;
-  count: number;
-};
-
-type FilterBounds = {
-  price: RangeValue;
-  size: RangeValue;
-};
+import {
+  addNumberOption,
+  applyFilters,
+  areFiltersEqual,
+  clamp,
+  createDefaultFilters,
+  createHistogram,
+  formatBathroomLabel,
+  formatBedroomLabel,
+  formatCurrency,
+  getActiveFilterCount,
+  getAvailabilityScopedApartments,
+  getFilterBounds,
+  getRangePercentage,
+  getSortedUniqueValues,
+  isBucketInRange,
+  toSentenceCase,
+  toggleNumberOption,
+  type FilterBounds,
+  type FilterState,
+  type HistogramBucket,
+  type RangeValue,
+} from "@/lib/apartment-filters";
 
 const PRICE_CHART_CONFIG = {
   count: {
@@ -613,196 +612,6 @@ function Amenity({ icon, value }: { icon: ReactNode; value: string }) {
   );
 }
 
-function getAvailabilityScopedApartments(
-  apartments: Apartment[],
-  showUnavailable: boolean,
-) {
-  if (showUnavailable) {
-    return apartments;
-  }
-
-  return apartments.filter((apartment) => apartment.status === "available");
-}
-
-function applyFilters(apartments: Apartment[], filters: FilterState) {
-  return apartments.filter((apartment) => {
-    const matchesPrice =
-      apartment.monthlyRent >= filters.price.min &&
-      apartment.monthlyRent <= filters.price.max;
-    const matchesSize =
-      apartment.sizeM2 >= filters.size.min &&
-      apartment.sizeM2 <= filters.size.max;
-    const matchesBedrooms =
-      filters.bedrooms.length === 0 ||
-      filters.bedrooms.includes(apartment.bedrooms);
-    const matchesBathrooms =
-      filters.bathrooms.length === 0 ||
-      filters.bathrooms.includes(apartment.bathrooms);
-
-    return matchesPrice && matchesSize && matchesBedrooms && matchesBathrooms;
-  });
-}
-
-function getFilterBounds(apartments: Apartment[]): FilterBounds {
-  return {
-    price: getBounds(apartments.map((apartment) => apartment.monthlyRent)),
-    size: getBounds(apartments.map((apartment) => apartment.sizeM2)),
-  };
-}
-
-function getBounds(values: number[]): RangeValue {
-  if (values.length === 0) {
-    return { min: 0, max: 0 };
-  }
-
-  return {
-    min: Math.min(...values),
-    max: Math.max(...values),
-  };
-}
-
-function createDefaultFilters(bounds: FilterBounds): FilterState {
-  return {
-    price: bounds.price,
-    size: bounds.size,
-    bedrooms: [],
-    bathrooms: [],
-  };
-}
-
-function getActiveFilterCount(
-  filters: FilterState,
-  defaultFilters: FilterState,
-) {
-  let count = 0;
-
-  if (!areRangesEqual(filters.price, defaultFilters.price)) {
-    count += 1;
-  }
-
-  if (!areRangesEqual(filters.size, defaultFilters.size)) {
-    count += 1;
-  }
-
-  if (filters.bedrooms.length > 0) {
-    count += 1;
-  }
-
-  if (filters.bathrooms.length > 0) {
-    count += 1;
-  }
-
-  return count;
-}
-
-function areFiltersEqual(first: FilterState, second: FilterState) {
-  return (
-    areRangesEqual(first.price, second.price) &&
-    areRangesEqual(first.size, second.size) &&
-    areNumberListsEqual(first.bedrooms, second.bedrooms) &&
-    areNumberListsEqual(first.bathrooms, second.bathrooms)
-  );
-}
-
-function areRangesEqual(first: RangeValue, second: RangeValue) {
-  return first.min === second.min && first.max === second.max;
-}
-
-function areNumberListsEqual(first: number[], second: number[]) {
-  return (
-    first.length === second.length &&
-    first.every((value) => second.includes(value))
-  );
-}
-
-function getSortedUniqueValues(values: number[]) {
-  return Array.from(new Set(values)).sort((first, second) => first - second);
-}
-
-function toggleNumberOption(values: number[], option: number) {
-  if (values.includes(option)) {
-    return values.filter((value) => value !== option);
-  }
-
-  return addNumberOption(values, option);
-}
-
-function addNumberOption(values: number[], option: number) {
-  return Array.from(new Set([...values, option])).sort(
-    (first, second) => first - second,
-  );
-}
-
-function createHistogram(
-  values: number[],
-  bounds: RangeValue,
-  bucketCount: number,
-): HistogramBucket[] {
-  const span = Math.max(bounds.max - bounds.min, 1);
-  const bucketSize = span / bucketCount;
-  const buckets = Array.from({ length: bucketCount }, (_, index) => ({
-    label: String(index + 1),
-    min: Math.round(bounds.min + bucketSize * index),
-    max:
-      index === bucketCount - 1
-        ? bounds.max
-        : Math.round(bounds.min + bucketSize * (index + 1)),
-    count: 0,
-  }));
-
-  values.forEach((value) => {
-    const bucketIndex = Math.min(
-      bucketCount - 1,
-      Math.max(0, Math.floor(((value - bounds.min) / span) * bucketCount)),
-    );
-    buckets[bucketIndex].count += 1;
-  });
-
-  return buckets;
-}
-
-function isBucketInRange(bucket: HistogramBucket, range: RangeValue) {
-  return bucket.max >= range.min && bucket.min <= range.max;
-}
-
-function getRangePercentage(value: number, bounds: RangeValue) {
-  if (bounds.max === bounds.min) {
-    return 0;
-  }
-
-  return ((value - bounds.min) / (bounds.max - bounds.min)) * 100;
-}
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function formatCurrency(value: number) {
-  return `${formatNumber(value)} €`;
-}
-
-function formatNumber(value: number) {
-  return Math.round(value)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-function formatBedroomLabel(value: number) {
-  if (value === 0) {
-    return "Estudio";
-  }
-
-  return `${value} ${value === 1 ? "dormitorio" : "dormitorios"}`;
-}
-
-function formatBathroomLabel(value: number) {
-  return `${value} ${value === 1 ? "baño" : "baños"}`;
-}
-
-function toSentenceCase(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
-
 function SlidersIcon() {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true" className="filter-button__icon">
@@ -818,13 +627,12 @@ function SlidersIcon() {
 
 function BedIcon() {
   return (
-    <svg viewBox="0 0 28 22" aria-hidden="true">
-      <path d="M3 5.5v12" />
-      <path d="M25 11.5v6" />
-      <path d="M3 12h22" />
-      <path d="M6 9.5h5.8c1 0 1.7.8 1.7 1.7v.8H6z" />
-      <path d="M15 9.5h5.8c1 0 1.7.8 1.7 1.7v.8H15z" />
-      <path d="M3 17.5h22" />
+    <svg viewBox="-0.75 -0.75 28.5 15" aria-hidden="true">
+      <path d="M0 1.35V13.5" />
+      <circle cx="6.75" cy="2.7" r="2.7" />
+      <path d="M13.5 9.45V5.4a2.7 2.7 0 0 1 2.7-2.7h8.1a2.7 2.7 0 0 1 2.7 2.7v4.05" />
+      <path d="M0 9.45h27" />
+      <path d="M27 9.45V13.5" />
     </svg>
   );
 }
@@ -832,11 +640,11 @@ function BedIcon() {
 function BathIcon() {
   return (
     <svg viewBox="0 0 28 22" aria-hidden="true">
-      <path d="M6 10.5V5.9A2.9 2.9 0 0 1 8.9 3h.4A2.7 2.7 0 0 1 12 5.7" />
-      <path d="M4 10.5h20v2.3a5.2 5.2 0 0 1-5.2 5.2H9.2A5.2 5.2 0 0 1 4 12.8z" />
-      <path d="M8 18v2" />
-      <path d="M20 18v2" />
-      <path d="M11 6.6h3.6" />
+      <path d="M8 9.5V6.2A2.5 2.5 0 0 1 12.9 5.5" />
+      <path d="M4 11.5h20" />
+      <path d="M5.2 11.5v1.4a4.8 4.8 0 0 0 4.8 4.8h8a4.8 4.8 0 0 0 4.8-4.8v-1.4" />
+      <path d="M8.5 19v1.3" />
+      <path d="M19.5 19v1.3" />
     </svg>
   );
 }

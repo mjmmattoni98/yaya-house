@@ -759,13 +759,19 @@ button {
     display: flex;
     min-width: 0;
     flex-direction: column;
-    gap: 4px;
-    align-items: flex-start;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.amenity:not(:first-child) {
+    border-left: 1px solid #e4e4e0;
 }
 
 .amenity__icon {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     width: 28px;
     height: 22px;
     color: #9d9d97;
@@ -788,7 +794,7 @@ button {
     width: 22px;
     height: 22px;
     border: 1px solid currentColor;
-    border-radius: 2px;
+    border-radius: 4px;
     color: #9d9d97;
     font-size: 10px;
     font-weight: 700;
