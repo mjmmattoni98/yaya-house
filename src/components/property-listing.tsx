@@ -639,20 +639,26 @@ function BedIcon() {
 
 function BathIcon() {
   return (
-    <svg viewBox="0 0 28 22" aria-hidden="true">
-      <path d="M8 9.5V6.2A2.5 2.5 0 0 1 12.9 5.5" />
-      <path d="M4 11.5h20" />
-      <path d="M5.2 11.5v1.4a4.8 4.8 0 0 0 4.8 4.8h8a4.8 4.8 0 0 0 4.8-4.8v-1.4" />
-      <path d="M8.5 19v1.3" />
-      <path d="M19.5 19v1.3" />
+    <svg viewBox="-0.75 -0.75 26.5 24" aria-hidden="true">
+      <path d="M8.75 3.75 5.63 0.63a1.88 1.88 0 0 0-1.25-.63C3.35 0 2.5.85 2.5 1.88V17.5a2.5 2.5 0 0 0 2.5 2.5H20a2.5 2.5 0 0 0 2.5-2.5V15" />
+      <path d="M10 2.5 7.5 5" />
+      <path d="M0 11.25H25" />
+      <path d="M6.25 20v2.5" />
+      <path d="M18.75 20v2.5" />
     </svg>
   );
 }
 
 function SizeIcon() {
   return (
-    <span className="size-icon" aria-hidden="true">
-      m<sup>2</sup>
-    </span>
+    <svg className="size-icon" viewBox="-0.75 -2 23 24" aria-hidden="true">
+      <path d="M13 0H5A5 5 0 0 0 0 5V16A5 5 0 0 0 5 21H16A5 5 0 0 0 21 16V8" />
+      <text x="9.5" y="14.5" textAnchor="middle" fontSize="13">
+        m
+      </text>
+      <text x="17.5" y="4" textAnchor="middle" fontSize="8">
+        2
+      </text>
+    </svg>
   );
 }
