@@ -3,9 +3,7 @@ import path from "node:path";
 
 import { PropertyListing } from "@/components/property-listing";
 import type {
-  Apartment,
-  ApartmentBrand,
-  ApartmentStatus,
+  Apartment
 } from "@/lib/apartment";
 
 type CsvRecord = Record<string, string>;
@@ -49,9 +47,9 @@ async function getApartments(): Promise<Apartment[]> {
   return parseCsv(csv).map((record, index) => ({
     id: record.id,
     title: record.title,
-    brand: parseApartmentBrand(record.brand),
+    brand: record.brand,
     neighborhood: record.neighborhood,
-    status: parseApartmentStatus(record.status),
+    status: record.status,
     bedrooms: Number(record.bedrooms),
     bathrooms: Number(record.bathrooms),
     maxOccupancy: Number(record.max_occupancy),
@@ -63,22 +61,6 @@ async function getApartments(): Promise<Apartment[]> {
     ageLabel: record.age_label,
     imageUrl: PROPERTY_IMAGES[index % PROPERTY_IMAGES.length],
   }));
-}
-
-function parseApartmentBrand(value: string): ApartmentBrand {
-  if (value === "Yaya FLEX" || value === "Yaya STAY") {
-    return value;
-  }
-
-  throw new Error(`Unknown apartment brand: ${value}`);
-}
-
-function parseApartmentStatus(value: string): ApartmentStatus {
-  if (value === "available" || value === "reserved" || value === "rented") {
-    return value;
-  }
-
-  throw new Error(`Unknown apartment status: ${value}`);
 }
 
 function parseCsv(input: string): CsvRecord[] {
