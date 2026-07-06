@@ -61,10 +61,12 @@ button {
 }
 
 .listing-toolbar {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 20px;
+    min-height: 34px;
     margin-bottom: 24px;
 }
 
@@ -83,9 +85,13 @@ button {
 }
 
 .listing-actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     display: flex;
     align-items: center;
     gap: 18px;
+    transform: translate(-50%, -50%);
     white-space: nowrap;
 }
 
@@ -383,8 +389,10 @@ button {
     }
 
     .listing-actions {
+        position: static;
         justify-content: space-between;
         width: 100%;
+        transform: none;
     }
 
     .property-grid {
