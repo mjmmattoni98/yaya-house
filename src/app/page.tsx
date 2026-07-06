@@ -49,9 +49,9 @@ async function getApartments(): Promise<Apartment[]> {
   return parseCsv(csv).map((record, index) => ({
     id: record.id,
     title: record.title,
-    brand: normalizeBrand(record.brand),
+    brand: record.brand,
     neighborhood: record.neighborhood,
-    status: normalizeStatus(record.status),
+    status: record.status,
     bedrooms: Number(record.bedrooms),
     bathrooms: Number(record.bathrooms),
     maxOccupancy: Number(record.max_occupancy),
@@ -110,16 +110,4 @@ function splitCsvLine(line: string): string[] {
 
   values.push(value);
   return values;
-}
-
-function normalizeBrand(brand: string): ApartmentBrand {
-  return brand === "Yaya FLEX" ? "Yaya FLEX" : "Yaya STAY";
-}
-
-function normalizeStatus(status: string): ApartmentStatus {
-  if (status === "reserved" || status === "rented") {
-    return status;
-  }
-
-  return "available";
 }

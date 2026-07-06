@@ -1,12 +1,9 @@
-export type ApartmentStatus = "available" | "reserved" | "rented";
-export type ApartmentBrand = "Yaya STAY" | "Yaya FLEX";
-
 export type Apartment = {
   id: string;
   title: string;
-  brand: ApartmentBrand;
+  brand: string;
   neighborhood: string;
-  status: ApartmentStatus;
+  status: string;
   bedrooms: number;
   bathrooms: number;
   maxOccupancy: number;
